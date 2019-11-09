@@ -11,7 +11,7 @@ import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {environment} from "../environments/environment";
-import {RouterState, StoreRouterConnectingModule} from "@ngrx/router-store";
+import {StoreRouterConnectingModule} from "@ngrx/router-store";
 
 const routerStateWorks = {
   state: {
@@ -37,26 +37,28 @@ const initialState = {
         BrowserModule,
         AppRoutingModule,
         HeroesModule.forRoot(),
-      /* start NgRx */
-      StoreModule.forRoot(reducers, {
-        metaReducers,
-        initialState,
-        runtimeChecks: {
-          strictStateImmutability: true,
-          strictActionImmutability: true,
-          strictActionSerializability: true,
-          strictStateSerializability: true
-        }
-      }),
-      EffectsModule.forRoot([]),
-      StoreDevtoolsModule.instrument({
-        maxAge: 25,
-        logOnly: environment.production
-      }),
-      StoreRouterConnectingModule.forRoot({
-        routerState: RouterState.Minimal,
-        serializer: CustomRouterSerializer
-      })
+        /* start NgRx */
+        StoreModule.forRoot(reducers, {
+          metaReducers,
+          initialState,
+          runtimeChecks: {
+            strictStateImmutability: true,
+            strictActionImmutability: true,
+            // doesn't work with stackblitz
+            // strictActionSerializability: true,
+            // strictStateSerializability: true
+          }
+        }),
+        EffectsModule.forRoot([]),
+        StoreDevtoolsModule.instrument({
+          maxAge: 25,
+          logOnly: environment.production
+        }),
+        StoreRouterConnectingModule.forRoot({
+          // doesn't work with stackblitz
+          // routerState: RouterState.Minimal,
+          serializer: CustomRouterSerializer
+        })
       /* end NgRx */
     ],
     providers: [],
