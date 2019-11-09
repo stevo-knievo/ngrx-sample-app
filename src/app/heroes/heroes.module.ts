@@ -3,10 +3,16 @@ import {HeroesRoutingModule} from "./heroes-routing.module";
 import {HeroesResolver} from "./heroes-resolver";
 import {HeroesService} from "./heroes.service";
 import {HeroResolver} from "./hero-resolver";
+import {StoreModule} from "@ngrx/store";
+import {EffectsModule} from "@ngrx/effects";
+import {HeroesEffects} from "./store/heroes.effects";
+import {heroesReducer} from "./store/reducers/heroes.reducers";
 
 @NgModule({
     imports: [
-        HeroesRoutingModule
+        HeroesRoutingModule,
+        StoreModule.forFeature("heroes", heroesReducer),
+        EffectsModule.forFeature([HeroesEffects])
     ],
     declarations: [],
     exports: []
