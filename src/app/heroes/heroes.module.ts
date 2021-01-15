@@ -18,7 +18,7 @@ import {heroesReducer} from "./store/reducers/heroes.reducers";
     exports: []
 })
 export class HeroesModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<HeroesModule> {
         return {
             ngModule: HeroesModule,
             providers: [HeroesService, HeroesResolver, HeroResolver]

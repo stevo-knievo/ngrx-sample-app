@@ -48,8 +48,13 @@ export const getSelectedHero1 = createSelector(
   selectHeroesState,
   getRouteState,
   (state, router) => {
-    const hero = state.entities[router.state.params.heroId];
-    console.log("getSelectedHero", hero, hero.id, hero.name);
-    return hero;
+      if (!router.state.params.heroId) {
+        return;
+      }
+
+      const hero = state.entities[router.state.params.heroId];
+      // FixMe: simplifies the problem... hero is undefined if you navigation for /hero/:heroId to / and following line will throw an error.
+      console.log("getSelectedHero", hero, hero.id, hero.name);
+      return hero;
   }
 );
